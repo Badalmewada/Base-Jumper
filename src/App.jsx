@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { sdk } from '@farcaster/miniapp-sdk';
-import logo from './assets/base_jumper.png';
 
 
 // --- Game Constants ---
