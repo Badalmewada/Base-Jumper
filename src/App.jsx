@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { sdk } from '@farcaster/miniapp-sdk';
 
 
 // --- Game Constants ---
@@ -57,13 +58,9 @@ const App = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   // --- BASE SDK READY CALL (This is the critical block in App.jsx) ---
-  useEffect(() => {
-    // We check if 'sdk' is available globally (thanks to the script tag)
-    if (window.sdk && typeof window.sdk.actions.ready === 'function') {
-        // This is the line that tells the Farcaster client to hide the splash screen.
-        window.sdk.actions.ready(); 
-    }
-  }, []); // Runs only once after the component is rendered
+   useEffect(() => {
+        sdk.actions.ready();
+    }, []); // Runs only once after the component is rendered
 
   // Load high score from local storage
   useEffect(() => {
