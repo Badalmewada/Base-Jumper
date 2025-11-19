@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 
+
 // --- Game Constants ---
 const GROUND_HEIGHT = 20; // px
 const DINO_SIZE = 40; // px
@@ -54,6 +55,15 @@ const App = () => {
   const [obstacles, setObstacles] = useState([]);
   const gameLoopRef = useRef();
   const [isPaused, setIsPaused] = useState(false);
+
+  // --- BASE SDK READY CALL (This is the critical block in App.jsx) ---
+  useEffect(() => {
+    // We check if 'sdk' is available globally (thanks to the script tag)
+    if (window.sdk && typeof window.sdk.actions.ready === 'function') {
+        // This is the line that tells the Farcaster client to hide the splash screen.
+        window.sdk.actions.ready(); 
+    }
+  }, []); // Runs only once after the component is rendered
 
   // Load high score from local storage
   useEffect(() => {
@@ -364,5 +374,6 @@ const App = () => {
     </div>
   );
 };
+
 
 export default App;
